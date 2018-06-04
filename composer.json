@@ -1,0 +1,16 @@
+{
+    "name": "zingle/api-resource-mapper",
+    "type": "laravel-package",
+    "license": "MIT",
+    "require": {
+        "php": "^7.1",
+        "symfony/yaml": "^4.1",
+        "symfony/property-access": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zingle\\ApiResourceMapper\\Tests\\": "tests",
+            "Zingle\\ApiResourceMapper\\": "src"
+        }
+    }
+}
