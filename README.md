@@ -19,16 +19,13 @@ For any module requiring resource mapping, add a mapper registration to its serv
         $this->app->bind('zingle.foo_module.model_meta_factory', function (Container $app) {
             return new ModelMetaFactory($app->make('zingle.foo_module.meta_loader'));
         });
-        $this->app->bind('zingle.foo_module.mapper', function (Container $app) {
-            $propertyAccessor = PropertyAccess::createPropertyAccessor();
-
-            return new Mapper(
-                $app->make('zingle.foo_module.model_meta_factory'),
-                $propertyAccessor
-            );
-        });
-        $this->app->alias('zingle.foo_module.mapper', Mapper::class);
 
         return $this;
     }
+```
+
+In the constructor of the AbstractResource for the Module, generate a mapper using the factory:
+
+```php
+$this->mapper = $mapperFactory->getMapper(app('zingle.foo_module.model_meta_factory'));
 ```
