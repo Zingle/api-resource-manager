@@ -1,12 +1,9 @@
 <?php
-namespace Zingle\ApiResourceMapper\Provider;
+namespace Zingle\ApiResourceMapper;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\App;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Zingle\ApiResourceMapper\Loader;
-use Zingle\ApiResourceMapper\Mapper;
-use Zingle\ApiResourceMapper\ModelMetaFactory;
 use ZingleCom\LaravelModules\Module\ModuleInterface;
 
 class Factory
