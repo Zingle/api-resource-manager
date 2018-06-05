@@ -5,13 +5,30 @@ The Zingle API Resource Mapper provides helpers for structuring and serializing 
 Add `zingle/api-resource-mapper` to `composer.json`
 
 # Usage
-For any module requiring resource mapping, add the following to the service provider's `register` method:
+For any module requiring resource mapping, add a mapper registration to its service provider:
 
 ```php
-$abstractPrefix = "foo.bar";
-$module = $this->app->make('laravel_modules.repository')->find('MyModule');
-Factory::bind($this->app, $abstractPrefix, $module);
-```
+    private function registerMapper()
+    {
+        $this->app->bind('zingle.foo_module.meta_loader', function (Container $app) {
+            /** @var Module $module */
+            $module = $app->make('laravel_modules.repository')->find('FooModule');
 
-This will create bindings for `foo.bar.meta_loader`, `foo.bar.model_meta_factory` and `foo.bar.mapper` 
-using the mappings in the `Resources/config/mapping` directory of `MyModule`
+            return new Loader($module->getExtraPath('Resources/config/mapping'));
+        });
+        $this->app->bind('zingle.foo_module.model_meta_factory', function (Container $app) {
+            return new ModelMetaFactory($app->make('zingle.foo_module.meta_loader'));
+        });
+        $this->app->bind('zingle.foo_module.mapper', function (Container $app) {
+            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+
+            return new Mapper(
+                $app->make('zingle.foo_module.model_meta_factory'),
+                $propertyAccessor
+            );
+        });
+        $this->app->alias('zingle.foo_module.mapper', Mapper::class);
+
+        return $this;
+    }
+```
