@@ -1,5 +1,5 @@
 {
-    "name": "zingle-com/api-resource-mapper",
+    "name": "zingle/api-resource-mapper",
     "type": "laravel-package",
     "license": "MIT",
     "require": {
