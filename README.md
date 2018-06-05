@@ -2,7 +2,7 @@
 The Zingle API Resource Mapper provides helpers for structuring and serializing models and collections returned by 3rd-party APIs
 
 # Installation
-Add `zingle/api-resource-mapper` to `composer.json`
+Add `zingle/api-resource-mapper` to `composer.json`. Add `ApiResourceMapperProvider` to `config/app.php`
 
 # Usage
 For any module requiring resource mapping, add a mapper registration to its service provider:
